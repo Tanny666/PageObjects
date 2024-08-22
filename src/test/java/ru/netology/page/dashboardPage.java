@@ -1,21 +1,22 @@
-package ru.netology;
+package ru.netology.page;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import ru.netology.data.dataHelper;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
-public class DashboardPage {
+public class dashboardPage {
     private final String balanceStart = "баланс: ";
     private final String balanceFinish = " р.";
     private final SelenideElement heading = $("[data-test-id='dashboard']");
     private final ElementsCollection cards = $$(".list__item div");
     private final SelenideElement reloadButton = $("[data-test-id='action-reload']");
 
-    public DashboardPage() {
+    public dashboardPage() {
         heading.shouldBe(visible);
     }
 
@@ -24,9 +25,9 @@ public class DashboardPage {
         return extractBalance(text);
     }
 
-    public TransferPage selectCardToTransfer(DataHelper.CardInfo cardInfo) {
+    public transferPage selectCardToTransfer(dataHelper.CardInfo cardInfo) {
         cards.findBy(Condition.attribute("data-test-id", cardInfo.getTestId())).$("button").click();
-        return new TransferPage();
+        return new transferPage();
     }
 
     public void reloadDashboardPage() {

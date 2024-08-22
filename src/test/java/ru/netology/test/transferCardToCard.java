@@ -1,15 +1,16 @@
-package ru.netology;
+package ru.netology.test;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import static com.codeborne.selenide.Selenide.open;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static ru.netology.DataHelper.*;
+import static ru.netology.data.dataHelper.*;
 
 
-public class TransferCardToCard {
-    DashboardPage dashboardPage;
+public class transferCardToCard {
+    ru.netology.page.dashboardPage dashboardPage;
     CardInfo firstCardInfo;
     CardInfo secondCardInfo;
     int firstCardBalance;
@@ -17,7 +18,7 @@ public class TransferCardToCard {
 
     @BeforeEach
     public void setup() {
-        var loginPage = open("http://localhost:9999", LoginPage.class);
+        var loginPage = open("http://localhost:9999", ru.netology.page.loginPage.class);
         var authInfo = getAuthInfo();
         var verificationPage = loginPage.validLogin(authInfo);
         var verificationCode = getVerificationCode();
@@ -30,7 +31,7 @@ public class TransferCardToCard {
 
 
     @Test
-    void GetErrorIfAmountMoreThenBalance() {
+    void getErrorIfAmountMoreThenBalance() {
         var amount = generateInvalidAmount(secondCardBalance);
         var transferPage = dashboardPage.selectCardToTransfer(firstCardInfo);
         transferPage.makeTransfer(String.valueOf(amount), secondCardInfo);
@@ -42,7 +43,7 @@ public class TransferCardToCard {
                 () -> assertEquals(secondCardBalance, actualBalanceSecondCard));
     }
     @Test
-    void ShouldTransferFromFirstCardToSecondCard() {
+    void shouldTransferFromFirstCardToSecondCard() {
         var amount = generateValidAmount(firstCardBalance);
         var expectedBalanceFirstCard = firstCardBalance - amount;
         var expectedBalanceSecondCard = secondCardBalance + amount;
