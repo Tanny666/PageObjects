@@ -2,15 +2,17 @@ package ru.netology.test;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import ru.netology.page.DashboardPage;
+import ru.netology.page.LoginPage;
 
 import static com.codeborne.selenide.Selenide.open;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static ru.netology.data.dataHelper.*;
+import static ru.netology.data.DataHelper.*;
 
 
-public class transferCardToCard {
-    ru.netology.page.dashboardPage dashboardPage;
+public class TransferCardToCard {
+    DashboardPage dashboardPage;
     CardInfo firstCardInfo;
     CardInfo secondCardInfo;
     int firstCardBalance;
@@ -18,7 +20,7 @@ public class transferCardToCard {
 
     @BeforeEach
     public void setup() {
-        var loginPage = open("http://localhost:9999", ru.netology.page.loginPage.class);
+        var loginPage = open("http://localhost:9999", LoginPage.class);
         var authInfo = getAuthInfo();
         var verificationPage = loginPage.validLogin(authInfo);
         var verificationCode = getVerificationCode();

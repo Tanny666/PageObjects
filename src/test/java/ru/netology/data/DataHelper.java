@@ -3,8 +3,8 @@ package ru.netology.data;
 import lombok.Value;
 import java.util.Random;
 
-public class dataHelper {
-    private dataHelper() {
+public class DataHelper {
+    private DataHelper() {
     }
 
     public static String getVerificationCode() {
